@@ -421,7 +421,7 @@ st.set_page_config(
     layout="wide",
 )
 
-st.title("ComfyMax v0.2")
+st.title("ComfyMax v0.4")
 st.caption(
     "From idea to a reviewed MiniMax H3 prompt, then on to ComfyUI."
 )

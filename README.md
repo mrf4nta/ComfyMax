@@ -2,6 +2,8 @@
 
 ComfyMax is a local Windows interface for preparing MiniMax H3 video prompts, reviewing them before rendering in ComfyUI, and browsing the results. It uses Streamlit for the interface and can use LM Studio to turn a scene idea into a structured prompt. You can also paste a finished prompt and skip LM Studio.
 
+![ComfyMax Interface](docs/images/comfymax-interface.png)
+
 ComfyMax v0.4.0 adds the optional **FlashVSR v1.1 Tiny-Long 2x** upscaler, a local Prompt Library, improved LM Studio model handling, and fixes to the prompt-to-ComfyUI workflow.
 
 > **Status:** v0.4.0 is the current tested public release.
