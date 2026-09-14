@@ -1,18 +1,12 @@
-﻿<<<<<<< HEAD
-# ComfyMax
-=======
-# ComfyMax v0.3
->>>>>>> origin/main
+﻿# ComfyMax v0.4
 
 ComfyMax is a local Windows interface for preparing MiniMax H3 video prompts, reviewing them before rendering in ComfyUI, and browsing the results. It uses Streamlit for the interface and can use LM Studio to turn a scene idea into a structured prompt. You can also paste a finished prompt and skip LM Studio.
 
-This README describes the current development files, including the optional **FlashVSR v1.1 Tiny-Long 2x** upscaler. It does not assign a new release number.
+ComfyMax v0.4.0 adds the optional **FlashVSR v1.1 Tiny-Long 2x** upscaler, a local Prompt Library, improved LM Studio model handling, and fixes to the prompt-to-ComfyUI workflow.
 
-<<<<<<< HEAD
-## What's included in this version
-=======
-> **Status:** v0.3 is a working local version. ComfyMax now includes the Scene Builder, Video Gallery, Workflow Mapper, persistent ComfyUI output-folder settings, and a Windows update utility.
->>>>>>> origin/main
+> **Status:** v0.4.0 is the current tested public release.
+
+## What's new in v0.4
 
 - **Windows setup:** `setup_comfymax.bat` creates the ComfyMax environment and installs its Python dependencies.
 - **Optional FlashVSR v1.1:** a separate installer, isolated environment, automatic compatible-model downloads, checksum verification, progress reporting and output in the configured ComfyUI folder.
@@ -21,13 +15,9 @@ This README describes the current development files, including the optional **Fl
 - **Scene Builder:** compose characters, action, ordered dialogue turns, ending, camera and lighting before generating a final prompt.
 - **Video Gallery:** browse output subfolders, play, search, filter, sort, download, open files in Explorer and delete with confirmation.
 - **Workflow Mapper:** inspect an API workflow, review suggested mappings and install the workflow with its matching mapping.
-- **Text-only and 1â€“9 reference-image workflow mappings**, prompt approval, mapped render controls and an NVIDIA GPU monitor.
+- **Text-only and 1–9 reference-image workflow mappings**, prompt approval, mapped render controls and an NVIDIA GPU monitor.
 
-<<<<<<< HEAD
 ## Install and start
-=======
-## What's new in v0.3
->>>>>>> origin/main
 
 ### 1. Prepare your computer
 
@@ -46,7 +36,7 @@ ComfyMax setup installs the interface dependencies. It does not install ComfyUI,
 
 Extract the complete project archive into a writable folder, or clone the repository and select the branch/release you intend to use. Keep the project folders together; copying only `App.py` or the installer is insufficient.
 
-The repository URL recorded in the existing installation guide is [danielveresbelgium/ComfyMax](https://github.com/danielveresbelgium/ComfyMax). This README does not establish that its public branch already contains these development changes.
+The public repository is [danielveresbelgium/ComfyMax](https://github.com/danielveresbelgium/ComfyMax).
 
 ### 3. Run the interface setup
 
@@ -80,7 +70,7 @@ Open **Settings** and save your service URLs, workflow model selections and exis
 
 For example, if your actual output folder is `D:\ComfyUI\ComfyUI\output`, select that folder and use **Test output folder**. Use your own installation's path. This setting supplies the Gallery and the FlashVSR output location.
 
-The older [INSTALLATION.md](INSTALLATION.md) provides additional background. For the explicit Python requirement, setup commands and FlashVSR model layout in this development version, follow this README.
+The older [INSTALLATION.md](INSTALLATION.md) provides additional background. For the explicit Python requirement, setup commands and FlashVSR model layout in v0.4.0, follow this README.
 
 ## Make your first video
 
@@ -143,233 +133,13 @@ ComfyMax/
             â””â”€â”€ FlashVSR_v1.1_tcdecoder_bf16.safetensors
 ```
 
-For an installation at `D:\ComfyMax-Dev`, the exact folder is `D:\ComfyMax-Dev\engines\flashvsr\models`.
+For an installation at `D:\ComfyMax-EN`, for example, the exact folder is `D:\ComfyMax-EN\engines\flashvsr\models`.
 
 Do not rename official `.ckpt` or `.pth` files to these names: the format, contents and recorded hashes differ, and the runtime explicitly loads a separate prompt-context safetensors file. This Tiny-Long worker sets `vae=None` and does not require a separate Wan VAE download. Direct downloading from the author's repository would require a separately verified conversion or runtime change.
 
 For manual installation, obtain those four files from the compatible-model source above and place them directly in the model folder. Run the installer to complete dependency setup and verify them. The manifest records each download URL and expected SHA-256; a checksum mismatch fails instead of accepting the file.
 
-<<<<<<< HEAD
 To reuse models from a previous standalone installation:
-=======
-The installation guide covers the required software, cloning ComfyMax, creating the virtual environment, installing dependencies, testing the supplied ComfyUI workflow, starting LM Studio and ComfyUI, and the first ComfyMax launch.
-
-## Normal workflow
-
-```text
-Choose workflow
-    â†“
-Upload reference image(s)
-    â†“
-Enter the video idea
-    â†“
-Choose an LM Studio model
-    â†“
-Generate H3 prompt
-    â†“
-LM Studio model is unloaded
-    â†“
-Review/edit final prompt
-    â†“
-Approve prompt
-    â†“
-Send to ComfyUI
-    â†“
-Render and inspect result
-```
-
-Prompt generation and rendering are deliberately separate. Creating an H3 prompt does not immediately start a ComfyUI render.
-
-## Scene Builder workflow
-
-Scene Builder is optional. It is useful when you want help defining a scene before asking LM Studio to generate the final H3 prompt.
-
-```text
-Open Scene Builder
-    â†“
-Choose scene type, location and time
-    â†“
-Describe the characters
-    â†“
-Describe the main action
-    â†“
-Add dialogue turns if required
-    â†“
-Describe how the scene ends
-    â†“
-Choose camera and lighting
-    â†“
-Create Scene Builder prompt
-    â†“
-Review or edit
-    â†“
-Copy prompt
-    â†“
-Paste into the main ComfyMax prompt generator
-```
-
-The Scene Builder does not render a video itself. It creates structured input for the main ComfyMax H3 prompt generator.
-
-## Video Gallery workflow
-
-Before using the gallery, save the ComfyUI output folder in Settings.
-
-The gallery scans recursively, so videos can remain in separate ComfyUI subfolders.
-
-Deleting a video requires confirmation.
-
-## Using an existing H3 prompt
-
-LM Studio is optional if you already have a finished prompt:
-
-```text
-Paste H3 prompt into Final prompt
-    â†“
-Approve prompt
-    â†“
-Send to ComfyUI
-```
-
-## Reference images
-
-The current Ref2VA mappings have been tested with 1, 2 and 3 reference images. ComfyMax preserves their mapping order:
-
-```text
-picture_1 â†’ <Picture 1>
-picture_2 â†’ <Picture 2>
-picture_3 â†’ <Picture 3>
-```
-
-## Prompt review and H3 dialogue
-
-The **Final prompt** remains editable because generated prompts should always be reviewed.
-
-Dialogue is intended to remain literal and use H3 tags such as:
-
-```text
-<Subject 1> (S1) <d>[English] What a beautiful day.</d>
-```
-
-User-supplied dialogue should not be translated, paraphrased or repeated.
-
-## Render controls
-
-Depending on the mapping, ComfyMax can expose:
-
-- Duration
-- Resolution / megapixels
-- Aspect ratio
-- Steps
-- Seed
-
-Seed `0` means random.
-
-## Model selection
-
-The Settings page asks ComfyUI for the models it already knows about and can populate choices for UNET, video VAE, audio VAE and CLIP/text encoder.
-
-The ComfyUI **output folder** is stored separately in Settings for use by the Video Gallery.
-
-## GPU monitor and VRAM management
-
-The sidebar GPU monitor uses `nvidia-smi` and displays GPU utilization, VRAM used/total, temperature and power draw.
-
-ComfyMax intentionally does **not** unload the ComfyUI model after each render, which makes repeated renders faster.
-
-When finished, use **Unload model from ComfyUI**.
-
-## Render result
-
-The last rendered video remains visible in the right-hand panel. Available metadata includes:
-
-- width Ã— height
-- actual duration
-- video format
-- file size
-- seed
-- render time
-- workflow
-- ComfyUI prompt ID
-- final prompt
-
-`ffprobe` is used when available.
-
-## Workflow mappings
-
-API workflow JSON files live in `workflows/`.
-
-Matching mapping files live in `config/workflow_mappings/`.
-
-The workflow and mapping use the same filename.
-
-### Adding your own workflow
-
-ComfyMax includes a **Workflow Mapper** for custom ComfyUI workflows.
-
-1. Open the workflow in ComfyUI.
-2. Export it with **Export (API Format)**.
-3. Open **Workflow Mapper** in ComfyMax.
-4. Upload the API workflow JSON.
-5. Review the automatically suggested mappings.
-6. Check the compatibility report and warnings.
-7. Use **Add workflow to ComfyMax**.
-
-The Mapper installs the API workflow in `workflows/` and the generated mapping in `config/workflow_mappings/`.
-
-If files with the same name already exist, explicit confirmation is required before they can be replaced.
-
-## Updating ComfyMax
-
-For Git installations, run:
-
-```text
-Update_ComfyMax.bat
-```
-
-The updater checks GitHub for changes and updates the Python dependencies afterwards.
-
-For safety, the update stops if tracked ComfyMax files have been modified locally. Untracked user files are left untouched.
-
-## Access from another device
-
-Because ComfyMax uses Streamlit, it can also be opened from another device on the same local network when Streamlit is listening on the network interface and the Windows firewall allows the connection.
-
-This is particularly useful for reviewing generated videos from a tablet.
-
-## Troubleshooting
-
-### ComfyMax cannot render
-
-First confirm that the supplied `workflow_example` works directly in ComfyUI.
-
-### Missing nodes
-
-Install the nodes ComfyUI reports as missing, restart ComfyUI, and test again.
-
-### Missing model in Settings
-
-Refresh the model lists and confirm that ComfyUI itself can see the model.
-
-### Video Gallery says no output folder is configured
-
-Open **Settings**, enter the ComfyUI output folder, use **Test output folder**, and save the settings.
-
-### Video Gallery does not show a video
-
-Check the saved path, supported extension, current filters and use **Refresh gallery**.
-
-### Video cannot be deleted
-
-Make sure the file is not locked by another application and that Windows permits deletion.
-
-### High VRAM after rendering
-
-Use **Unload model from ComfyUI** when finished.
-
-### GPU monitor does not work
-
-Run:
->>>>>>> origin/main
 
 ```powershell
 .\install_FlashVSR.bat --models-from "D:\ComfyMax-FlashVSR\models"
@@ -397,7 +167,7 @@ For the output example above, this is `D:\ComfyUI\ComfyUI\output\videos\upscaled
 
 ### Validation scope
 
-The repository's [FlashVSR validation record](docs/FLASHVSR_VALIDATION.md) documents a real integrated-client test on an RTX 5060 Ti: a 124-frame, approximately 5.17-second clip was upscaled from 640Ã—640 to 1280Ã—1280 at 24 fps with audio. It also records four verified local model hashes and a real download of the small prompt model.
+The repository's [FlashVSR validation record](docs/FLASHVSR_VALIDATION.md) documents a real integrated-client test on an RTX 5060 Ti: a 124-frame, approximately 5.17-second clip was upscaled from 640×640 to 1280×1280 at 24 fps with audio. It also records four verified local model hashes and a real download of the small prompt model.
 
 That record does not establish a full fresh multi-gigabyte download test, browser-upload end-to-end testing or long-video validation. Start with a short clip; this worker decodes the input into memory. No general minimum VRAM or long-video performance guarantee is established by the repository.
 
